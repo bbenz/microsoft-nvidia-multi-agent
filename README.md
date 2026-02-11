@@ -125,9 +125,18 @@ All settings via environment variables (see `.env.example`):
 ├── deploy/
 │   └── aca_deploy.sh              # Azure Container Apps deployment
 └── docs/
-    ├── demo_script.md             # 2-minute conference talk track
-    └── troubleshooting.md         # Common failures
+    ├── deploying_models_foundry.md # Azure AI Foundry model deployment guide
+    ├── deploying_to_aca.md         # Full ACA deployment guide
+    ├── demo_script.md              # 2-minute conference talk track
+    └── troubleshooting.md          # Common failures
 ```
+
+## Deployment Guides
+
+| Guide | Description |
+|-------|-------------|
+| [Deploying Models with Azure AI Foundry](docs/deploying_models_foundry.md) | Set up GPT-4o and Nemotron Parse models |
+| [Deploying to Azure Container Apps](docs/deploying_to_aca.md) | Full ACA deployment with GPU support, CI/CD, monitoring |
 
 ## ACA Deployment
 
