@@ -165,6 +165,16 @@ else
     VENDOR=$(echo "${PARSE_RESPONSE}" | python3 -c "import sys,json; print(json.load(sys.stdin)['invoice']['vendor'])" 2>/dev/null || echo "unknown")
     WARNINGS=$(echo "${PARSE_RESPONSE}" | python3 -c "import sys,json; print(len(json.load(sys.stdin).get('warnings',[])))" 2>/dev/null || echo "?")
     info "Vendor: ${VENDOR}, Warnings: ${WARNINGS}"
+    # Display each warning message
+    if [[ "${WARNINGS}" =~ ^[0-9]+$ ]] && [[ "${WARNINGS}" -gt 0 ]]; then
+      echo "${PARSE_RESPONSE}" | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+for w in data.get('warnings', []):
+    msg = w if isinstance(w, str) else w.get('message', w.get('msg', str(w)))
+    print(f'  ⚠ {msg}')
+" 2>/dev/null || true
+    fi
   else
     fail "/parse response missing 'invoice' key"
     info "Response: ${PARSE_RESPONSE:0:200}"
