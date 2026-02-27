@@ -19,6 +19,13 @@
 
 set -euo pipefail
 
+# ---- Load .env if present (before defaults) ----
+if [[ -f .env ]]; then
+  set -a
+  source <(sed 's/\r$//' .env)
+  set +a
+fi
+
 # ---- Configuration ----
 RESOURCE_GROUP="${RESOURCE_GROUP:-rg-multi-agent-demo}"
 LOCATION="${LOCATION:-eastus2}"
@@ -314,8 +321,6 @@ if [[ "${APP_EXISTS}" == "true" ]]; then
     --resource-group "${RESOURCE_GROUP}" \
     --workload-profile-name "${ACA_WORKLOAD_PROFILE_NAME}" \
     --image "${IMAGE_FULL}" \
-    --target-port 8001 \
-    --ingress external \
     --min-replicas 0 \
     --max-replicas 3 \
     --cpu 4.0 \
@@ -358,8 +363,22 @@ else
     --output none
 fi
 
-# ---- Step 6: Get URL ----
-echo "[6/7] Getting application URL..."
+# ---- Step 6: Sync secrets from .env ----
+echo "[6/7] Syncing secrets from .env..."
+NIM_ENDPOINT_VAL="${NIM_ENDPOINT:-placeholder}"
+NIM_API_KEY_VAL="${NIM_API_KEY:-placeholder}"
+PARSER_API_KEY_VAL="${PARSER_API_KEY:-demo-api-key-change-me}"
+az containerapp secret set \
+  --name "${ACA_APP_NAME}" \
+  --resource-group "${RESOURCE_GROUP}" \
+  --secrets "nim-endpoint=${NIM_ENDPOINT_VAL}" \
+            "nim-api-key=${NIM_API_KEY_VAL}" \
+            "parser-api-key=${PARSER_API_KEY_VAL}" \
+  --output none
+echo "Secrets synced."
+
+# ---- Step 7: Get URL ----
+echo "[7/7] Getting application URL..."
 APP_URL=$(az containerapp show \
   --name "${ACA_APP_NAME}" \
   --resource-group "${RESOURCE_GROUP}" \
@@ -372,14 +391,6 @@ echo "  Deployment Complete!"
 echo "============================================"
 echo "  URL:  https://${APP_URL}"
 echo "  Health: https://${APP_URL}/health"
-echo ""
-echo "  Set secrets:"
-echo "    az containerapp secret set \\"
-echo "      --name ${ACA_APP_NAME} \\"
-echo "      --resource-group ${RESOURCE_GROUP} \\"
-echo "      --secrets nim-endpoint=<NIM_URL> \\"
-echo "                nim-api-key=<NIM_KEY> \\"
-echo "                parser-api-key=<API_KEY>"
 echo ""
 echo "  Update PARSER_URL in your .env:"
 echo "    PARSER_URL=https://${APP_URL}"

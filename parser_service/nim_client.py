@@ -170,7 +170,7 @@ async def call_nim(pdf_bytes: bytes) -> dict[str, Any]:
 
         async with httpx.AsyncClient(timeout=120.0) as client:
             resp = await client.post(
-                f"{config.nim_endpoint}/v1/chat/completions",
+                f"{config.nim_endpoint.rstrip('/')}/chat/completions",
                 json=payload,
                 headers=headers,
             )

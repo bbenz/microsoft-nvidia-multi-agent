@@ -132,7 +132,7 @@ async def run_direct(pdf_url: str) -> dict[str, Any]:
 
 async def run_agent(pdf_url: str) -> dict[str, Any]:
     """Orchestrate via OpenAI Responses API with tool use."""
-    from openai import OpenAI
+    from openai import AzureOpenAI, OpenAI
 
     tracer = init_telemetry()
 
@@ -143,7 +143,14 @@ async def run_agent(pdf_url: str) -> dict[str, Any]:
         request_id = str(uuid.uuid4())
         trace_id = format(span.get_span_context().trace_id, "032x")
 
-        client = OpenAI(api_key=config.openai_api_key)
+        if config.openai_api_type.lower() == "azure" and config.openai_api_base:
+            client = AzureOpenAI(
+                api_key=config.openai_api_key,
+                azure_endpoint=config.openai_api_base,
+                api_version=config.openai_api_version,
+            )
+        else:
+            client = OpenAI(api_key=config.openai_api_key)
 
         user_message = (
             f"Here's a PDF URL: {pdf_url}\n"

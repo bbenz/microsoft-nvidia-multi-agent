@@ -22,9 +22,6 @@ env/
 # Environment
 .env
 
-# Generated PDFs (re-generate with script)
-sample_data/*.pdf
-
 # OS
 .DS_Store
 Thumbs.db
