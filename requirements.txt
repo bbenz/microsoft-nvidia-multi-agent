@@ -10,3 +10,4 @@ opentelemetry-instrumentation-fastapi>=0.46b0
 opentelemetry-instrumentation-httpx>=0.46b0
 python-dotenv>=1.0.0
 fpdf2>=2.7.0
+pypdfium2>=4.0.0
