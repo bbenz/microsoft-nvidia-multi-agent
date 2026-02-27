@@ -29,6 +29,9 @@ sample_data/*.pdf
 .DS_Store
 Thumbs.db
 
+# Deployment build artifacts
+.aca-build-context/
+
 # OpenTelemetry local
 otel-data/
 
