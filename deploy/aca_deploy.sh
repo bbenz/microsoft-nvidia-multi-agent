@@ -27,7 +27,7 @@ if [[ -f .env ]]; then
 fi
 
 # ---- Configuration ----
-RESOURCE_GROUP="${RESOURCE_GROUP:-rg-multi-agent-demo}"
+RESOURCE_GROUP="${RESOURCE_GROUP:-bbenz-rg-multi-agent-demo}"
 LOCATION="${LOCATION:-eastus2}"
 ACR_NAME="${ACR_NAME:-acrmultiagentdemo}"
 ACA_ENV_NAME="${ACA_ENV_NAME:-multi-agent-env}"

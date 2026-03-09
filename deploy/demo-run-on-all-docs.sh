@@ -55,10 +55,10 @@ if [[ -f .env ]]; then
 fi
 
 # ---- Configuration ----
-RESOURCE_GROUP="${RESOURCE_GROUP:-rg-multi-agent-demo}"
+RESOURCE_GROUP="${RESOURCE_GROUP:-bbenz-rg-multi-agent-demo}"
 ACA_APP_NAME="${ACA_APP_NAME:-gpu-parse-agent}"
 PARSER_API_KEY="${PARSER_API_KEY:-demo-api-key-change-me}"
-OPENAI_RESOURCE_NAME="${OPENAI_RESOURCE_NAME:-multi-agent-openai}"
+OPENAI_RESOURCE_NAME="${OPENAI_RESOURCE_NAME:-bbenz-multi-agent-openai}"
 OPENAI_DEPLOYMENT_NAME="${OPENAI_DEPLOYMENT_NAME:-gpt-4o}"
 
 # GitHub raw base URL for sample PDFs

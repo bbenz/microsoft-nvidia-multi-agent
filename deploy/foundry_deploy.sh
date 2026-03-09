@@ -31,11 +31,11 @@ set -euo pipefail
 strip_cr() { tr -d '\r'; }
 
 # ---- Configuration ----
-RESOURCE_GROUP="${RESOURCE_GROUP:-rg-multi-agent-demo}"
+RESOURCE_GROUP="${RESOURCE_GROUP:-bbenz-rg-multi-agent-demo}"
 LOCATION="${LOCATION:-eastus2}"
 HUB_NAME="${HUB_NAME:-multi-agent-hub}"
 PROJECT_NAME="${PROJECT_NAME:-multi-agent-project}"
-OPENAI_RESOURCE_NAME="${OPENAI_RESOURCE_NAME:-multi-agent-openai}"
+OPENAI_RESOURCE_NAME="${OPENAI_RESOURCE_NAME:-bbenz-multi-agent-openai}"
 OPENAI_DEPLOYMENT_NAME="${OPENAI_DEPLOYMENT_NAME:-gpt-4o}"
 OPENAI_MODEL_NAME="${OPENAI_MODEL_NAME:-gpt-4o}"
 OPENAI_MODEL_VERSION="${OPENAI_MODEL_VERSION:-2024-11-20}"
