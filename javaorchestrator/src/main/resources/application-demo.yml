@@ -1,0 +1,13 @@
+# Demo profile overrides — suppress noisy Spring Boot output for clean demo console
+logging:
+  level:
+    root: WARN
+    com.microsoft.nvidia.orchestrator: WARN
+    orchestrator.audit: WARN
+    org.springframework: WARN
+    dev.langchain4j: WARN
+    io.opentelemetry: WARN
+
+spring:
+  main:
+    log-startup-info: false

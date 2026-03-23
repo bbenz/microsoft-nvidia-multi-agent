@@ -1,0 +1,23 @@
+orchestrator:
+  openai:
+    api-key: ${OPENAI_API_KEY:}
+    model: ${OPENAI_MODEL:gpt-4o}
+    api-base: ${OPENAI_API_BASE:}
+  parser:
+    url: ${PARSER_URL:http://localhost:8001}
+    api-key: ${PARSER_API_KEY:demo-api-key-change-me}
+    timeout-seconds: ${PARSER_TIMEOUT:120}
+  otel:
+    endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:}
+  demo:
+    pdf-url: ${DEMO_PDF_URL:http://localhost:8000/sample_invoice_anomaly.pdf}
+    mode: ${DEMO_MODE:direct}
+
+logging:
+  level:
+    com.microsoft.nvidia.orchestrator: ${LOG_LEVEL:INFO}
+    orchestrator.audit: INFO
+
+spring:
+  main:
+    banner-mode: off

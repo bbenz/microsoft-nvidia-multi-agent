@@ -1,0 +1,4 @@
+com/microsoft/nvidia/orchestrator/client/ParserClientTest.class
+com/microsoft/nvidia/orchestrator/OrchestratorApplicationTests.class
+com/microsoft/nvidia/orchestrator/service/OrchestratorServiceTest.class
+com/microsoft/nvidia/orchestrator/agent/InvoiceParsingToolsTest.class
